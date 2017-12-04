@@ -9,9 +9,19 @@
    YOU MUST USE array.map
 */
 
-function fizzBuzz(list) {
-
+function fizzBuzz(list){
+  return list.map(getWord);
 }
-
+function getWord(numbers){
+  if (numbers % 3 === 0 && numbers % 5 === 0) {
+    return ("FizzBuzz");
+  } else if (numbers % 3 === 0) {
+    return ("Fizz");
+  } else if (numbers % 5 === 0) {
+    return ("Buzz");
+  } else {
+    return (numbers);
+  }
+}
 
 module.exports = fizzBuzz;
