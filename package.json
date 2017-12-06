@@ -19,5 +19,7 @@
   },
   "devDependencies": {
     "jest": "^21.2.1"
-  }
+  },
+  "main": "customTesting.js",
+  "description": ""
 }
