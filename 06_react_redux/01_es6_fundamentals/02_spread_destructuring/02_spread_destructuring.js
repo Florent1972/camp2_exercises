@@ -5,9 +5,13 @@ function go(options) {
   } = options;
 
   console.log("speed=", speed, "hyperdrive:", hyperdrive, "frobnifier:", frobnifier);
+  console.log(go);
 }
 
 go({ speed: 5 });
+
+
+
 
 function lastIndexOf(arr, elt, start) {
   for (let i = start - 1; i >= 0; i--) {
