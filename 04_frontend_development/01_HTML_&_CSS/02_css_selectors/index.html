@@ -1,52 +1,67 @@
 <!DOCTYPE html>
 <html>
- <head>
-   <meta charset="utf8" />
-   <title>Hello</title>
- </head>
- <body>
-   <style>
-     .bgtable {
-       color: blue;
-       background-color: green;
-     }
-     .important {
-       font-weight: bold;
-       background-color:rgb(255, 0, 0);
+  <head>
+    <meta charset="utf8"/>
+    <title>CSS Selectors</title>
+  </head>
+  <body>
+    <style>
+      tr:nth-child(even) {
+        background-color: rgba(185, 179, 179, 0.5);
+      }
+      tr:hover{background-color: tomato;}
+      .important {
+        font-weight: bold;
+      }
+      .emphasis {
+        font-style: italic;
+      }
+      .important.emphasis {
+        background-color: rgb(255, 0, 0);
+      }
+    </style>
+    <h1>CSS Selectors</h1>
+    <table>
+      <tr>
+        <td>Line</td>
+        <td>One</td>
+      </tr>
+      <tr>
+        <td>Line</td>
+        <td>Two</td>
+      </tr>
+      <tr>
+        <td>Line</td>
+        <td>Three</td>
+      </tr>
+      <tr>
+        <td>Line</td>
+        <td>Four</td>
+      </tr>
+      <tr>
+        <td>Line</td>
+        <td>Five</td>
+      </tr>
+      <tr>
+        <td>Line</td>
+        <td>Six</td>
+      </tr>
+    </table>
 
-       }
-     .emphasis {
-       font-style:italic;
-     }
-   </style>
-
-   <table>
-     <tr class="bgtable">
-       <td>mon contenu 1</td>
-       <td>mon contenu 1</td>
-     </tr>
-     <tr>
-       <td>mon contenu 2</td>
-       <td>mon contenu 2</td>
-     </tr>
-     <tr class="bgtable">
-       <td>mon contenu 3</td>
-       <td>mon contenu 3</td>
-     </tr>
-     <tr>
-       <td>mon contenu 4</td>
-       <td>mon contenu 4</td>
-     </tr>
-     <tr class="bgtable">
-       <td>mon contenu 5</td>
-       <td>mon contenu 5</td>
-     </tr>
-
-   </table>
-
-   <p>
-     <span class="important emphasis">Lorem ipsum dolor sit amet, consectetur adipisicing elit,</span> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-   </p>
-   <!-- Page content here! -->
- </body>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      Excepteur <span class="emphasis important">sint occaecat</span> cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <div>
+      <span class="important">My first line of text with span</span>
+    </div>
+    <div>
+      <span >My second line of text with <span class="emphasis">span in italic</span></span>
+    </div>
+    <div>
+      <span class="emphasis important">My third line of text with bold italic and red</span>
+    </div>
+  </body>
 </html>

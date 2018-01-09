@@ -1,1 +1,1 @@
-curl wttr.in
+curl -X GET "wttr.in";

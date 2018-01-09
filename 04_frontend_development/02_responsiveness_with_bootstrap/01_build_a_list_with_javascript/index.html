@@ -14,19 +14,13 @@
     </nav>
     <div class="container">
       <div class="row">
-        <div class="col col-sm-3">
-          <form>
-            <div class="form-group">
-              <label for="search-department">Search department</label>
-              <input type="text" class="form-control" id="search-department" />
-            </div>
-          </form>
-        </div>
+        <div class="col col-sm-3"></div>
         <div class="col col-sm-9">
           <h1>List of french departments</h1>
 
           <ul id="department-list" class="list-group">
             <!-- Your list will end up here -->
+
           </ul>
 
         </div>
@@ -34,21 +28,18 @@
     </div>
     <script src="./departments.js"></script>
     <script>
-    function displayDepartments (departmentsArray) {
-      const nodeDepartmentList = document.getElementById("department-list");
-      const htmlText = departmentsArray.map(department =>
-      `<li>${department}</li>`).join("");
-      nodeDepartmentList.innerHTML=htmlText
-    }
-    displayDepartments (DEPARTMENTS)
-
-    const searchInput = document.getElementById("search-department")
-    searchInput.addEventListener("input",function() {
-    console.log(searchInput.value);
-    const filteredDepartments = DEPARTMENTS.filter(department =>
-      department.includes(searchInput.value.toUpperCase()));
-      displayDepartments(filteredDepartments);
-    });
+      // Your code here
+      function transformDepartments() {
+        return DEPARTMENTS
+        .map((department) => `<li>${department}</li>`)
+        .join("");
+      }
+      function getDepartmentAsHTML() {
+        const element = document.querySelector("ul");
+        element.innerHTML = transformDepartments()
+      }
+      getDepartmentAsHTML();
+      // the departments are accessible in a global variable named DEPARTMENTS
     </script>
   </body>
 </html>

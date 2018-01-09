@@ -1,86 +1,170 @@
 const request = require("request");
 
-function fetchPosts(output){
+function fetchPosts(callback) {
   request(
     {
+      method: "GET",
+      url: "http://jsonplaceholder.typicode.com/posts"
+    }
+    ,
+    function (error, response, body) {
+      callback(body);
+    });
+}
+
+function fetchPost(id, callback) {
+  request(
+    {
+      method: "GET",
+      url: "http://jsonplaceholder.typicode.com/posts/" + id
+    }
+    ,
+    function (error, response, body) {
+      callback(body);
+    });
+}
+
+function fetchPostByUser(userId, callback) {
+  request(
+    {
+      method: "GET",
+      url: "http://jsonplaceholder.typicode.com/posts", qs: {"userId": userId}
+    }
+    ,
+    function (error, response, body) {
+      callback(body);
+    });
+}
+
+function fetchUsers(callback) {
+  request(
+    {
+      method: "GET",
+      url: "http://jsonplaceholder.typicode.com/users"
+    }
+    ,
+    function (error, response, body) {
+      callback(body);
+    });
+}
+
+function fetchUser(userId, callback) {
+  request(
+    {
+      method: "GET",
+      url: "http://jsonplaceholder.typicode.com/users/" + userId
+    }
+    ,
+    function (error, response, body) {
+      callback(body);
+    });
+}
+
+function fetchComments(callback) {
+  request(
+    {
+      method: "GET",
+      url: "http://jsonplaceholder.typicode.com/comments/"
+    }
+    ,
+    function (error, response, body) {
+      callback(body);
+    });
+}
+
+function fetchCommentsByPost(postId, callback) {
+  request(
+    {
+      method: "GET",
+      url: "http://jsonplaceholder.typicode.com/comments", qs: {"postId": postId}
+    }
+    ,
+    function (error, response, body) {
+      callback(body);
+    });
+}
+
+function publishPost(userId, title, body, callback) {
+  const newPost = {userId: userId, title: title, body: body};
+  //console.log(newPost);
+  request(
+    {
+      method: "POST",
       url: "http://jsonplaceholder.typicode.com/posts",
-      method: "GET"
-    },
-    function(error, response, body) {
-      output(body);
+      form: newPost
+      // body: JSON.stringify(newPost)
+      // body: newPost,
+      // json: true
+    }
+    ,
+    function (error, response, body) {
+      callback(body);
     });
 }
 
-function fetchPostByUser(userId, output){
+function publishComment(postId, name, email, body, callback) {
+  const newComment = {postId: postId, name: name, email: email, body: body};
   request(
     {
-      url: `http://jsonplaceholder.typicode.com/posts?userId=${userId}`,
-      method: "GET"
-    },
-    function(error, response, body) {
-      output(body);
-    });
-}
-
-function fetchPost(postId, output){
-  request(
-    {
-      url: `http://jsonplaceholder.typicode.com/posts/${postId}`,
-      method: "GET"
-    },
-    function(error, response, body) {
-      output(body);
-    });
-}
-
-function fetchUsers(output){
-  request(
-    {
-      url: "http://jsonplaceholder.typicode.com/users",
-      method: "GET"
-    },
-    function(error, response, body) {
-      output(body);
-    });
-}
-
-function fetchUser(userId, output){
-  request(
-    {
-      url: `http://jsonplaceholder.typicode.com/users/${userId}`,
-      method: "GET"
-    },
-    function(error, response, body) {
-      output(body);
-    });
-}
-
-function fetchComments(output){
-  request(
-    {
+      method: "POST",
       url: "http://jsonplaceholder.typicode.com/comments",
-      method: "GET"
-    },
-    function(error, response, body) {
-      output(body);
+      form: newComment
+    }
+    ,
+    function (error, response, body) {
+      callback(body);
     });
 }
 
-function fetchCommentsByPost(postId, output){
+function updatePostTitle(postId, newTitle, callback) {
+  const newPost = {title: newTitle};
   request(
     {
-      url: `http://jsonplaceholder.typicode.com/comments?postId=${postId}`,
-      method: "GET"
-    },
-    function(error, response, body) {
-      output(body);
+      method: "PUT",
+      url: "http://jsonplaceholder.typicode.com/posts/" + postId,
+      form: newPost
+    }
+    ,
+    function (error, response, body) {
+      callback(body);
     });
 }
 
-function callback(result){
-  console.log(result);
+function updatePostBody(postId, newBody, callback) {
+  const newPost = {body: newBody};
+  request(
+    {
+      method: "PUT",
+      url: "http://jsonplaceholder.typicode.com/posts/" + postId,
+      form: newPost
+    }
+    ,
+    function (error, response, body) {
+      callback(body);
+    });
 }
-fetchCommentsByPost(1, callback);
+
+function updatePost(postId, newTitle, newBody, callback) {
+  const newPost = {title: newTitle, body: newBody};
+  request(
+    {
+      method: "PUT",
+      url: "http://jsonplaceholder.typicode.com/posts/" + postId,
+      form: newPost
+    }
+    ,
+    function (error, response, body) {
+      callback(body);
+    });
+}
+
+
+//
+// function output(result) {
+//   console.log(result);
+// }
+//
+// publishPost(1, "ahah title", "boddyyy", output);
 
 module.exports = {
   fetchPosts: fetchPosts,
@@ -91,38 +175,8 @@ module.exports = {
   fetchComments: fetchComments,
   fetchCommentsByPost: fetchCommentsByPost,
   publishPost: publishPost,
-  publishComment: publishComment
+  publishComment: publishComment,
+  updatePostTitle: updatePostTitle,
+  updatePostBody: updatePostBody,
+  updatePost: updatePost
 };
-
-function publishPost(myUserId, myTitle, myBody, output){
-  request(
-    {
-      url: "http://jsonplaceholder.typicode.com/posts",
-      method: "POST",
-      form: {
-        userId: myUserId,
-        title: myTitle,
-        body: myBody
-      }},
-    function(error, response, body) {
-      output(body);
-    });
-}
-publishPost(2 ,"title", "body", callback);
-
-function publishComment(myPostId, myName, myEmail, myBody, output){
-  request(
-    {
-      url: "http://jsonplaceholder.typicode.com/comments",
-      method: "POST",
-      form: {
-        postId: myPostId,
-        name: myName,
-        email: myEmail,
-        body: myBody
-      }},
-    function(error, response, body) {
-      output(body);
-    });
-}
-publishComment(4 ,"name", "email", "body", callback);

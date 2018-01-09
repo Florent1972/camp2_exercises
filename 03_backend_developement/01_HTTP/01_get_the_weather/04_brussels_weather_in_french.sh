@@ -1,1 +1,1 @@
-curl wttr.in/Brussels?lang=fr > brussels.weather
+curl -X GET -H 'Accept-Language: fr-BE' "wttr.in/Brussels" > brussels.weather

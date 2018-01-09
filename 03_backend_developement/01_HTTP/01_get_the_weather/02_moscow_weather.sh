@@ -1,1 +1,1 @@
-curl wttr.in/Moscow
+curl -X GET "wttr.in/Moscow";

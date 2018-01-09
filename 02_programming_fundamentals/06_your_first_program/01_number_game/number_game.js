@@ -1,10 +1,3 @@
-//Write a program that generates a random number between 1 and 100
-function aleatoire(N) {
-  return (Math.floor((N) * Math.random()+1));
-
-}
-let misteryNumber = aleatoire(1, 100);
-console.log(misteryNumber);
 const readline = require("readline");
 
 const reader = readline.createInterface({
@@ -12,26 +5,47 @@ const reader = readline.createInterface({
   output: process.stdout
 });
 
-function findNumber(input){
-  if (parseInt(input, 10) === "misteryNumber") {
-    console.log("Great job!");
-    reader.close();
-  }
-  else if (parseInt(input, 10) < 1 || (parseInt(input, 10) > 100)){
-    console.log("The number is between 1 and 100");
-    reader.question("What is the number?", findNumber);
-  }
-  else if (parseInt(input, 10 < misteryNumber)) {
-    console.log("Too low");
-    reader.question("What is the number?", findNumber);
-  }
-  else if (parseInt(input, 10 > misteryNumber)) {
+function getRandomInt(min, max) {
+  const roundedMin = Math.ceil(min);
+  const roundedMax = Math.floor(max);
+  return Math.floor(Math.random() * (roundedMax - roundedMin)) + roundedMin;
+}
+
+const randomNumber = getRandomInt(0, 100);
+
+function isAnswerGood(answer) {
+  const answerInNumber = Number(answer);
+
+  if (isNaN(answerInNumber) === true) {
+    console.log("This was not a number");
+    return false;
+
+  } else if (answerInNumber > randomNumber) {
     console.log("Too high");
-    reader.question("What is the number?", findNumber);
-  }
-  else if (Number.isInteger(parseInt(input, 10)) === false){
-    console.log("This is not a number");
-    reader.question("What is the number?", findNumber);
+    return false;
+
+  } else if (answerInNumber < randomNumber) {
+    console.log("Too low");
+    return false;
+
+  } else {
+    return true;
+
   }
 }
-reader.question("What is the number?", findNumber);
+
+function game() {
+  console.log(`protip ${randomNumber}`);
+  reader.question(
+    "What is the magic number ? \n",
+    function(answer) {
+      if (isAnswerGood(answer)) {
+        reader.close();
+      } else {
+        game();
+      }
+    }
+  );
+}
+
+const launchGame = game();

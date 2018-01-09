@@ -1,1 +1,1 @@
-curl wttr.in/Berlin?lang=de
+curl -X GET -H 'Accept-Language: de-DE' "wttr.in/Berlin";
