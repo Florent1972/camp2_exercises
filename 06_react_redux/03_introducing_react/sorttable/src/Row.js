@@ -13,3 +13,18 @@ class Row extends Component {
 }
 
 export default Row
+
+
+// en mode fonction au lieu du mode class
+
+function row(props) {
+  return (
+    <tr>
+      <td>{props.product.decathlon_id}</td>
+      <td>{props.product.title}</td>
+      <td>{props.product.price}</td>
+    </tr>
+  );
+}
+
+export default Row
